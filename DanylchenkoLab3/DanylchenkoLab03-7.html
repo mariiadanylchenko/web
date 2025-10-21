@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Таблиця</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            border: 3px double black;
+            background-color: lightblue;
+            width: 60%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        .center{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <td rowspan="2" colspan="2"></td>
+            <th colspan="2">Характеристики</th>
+        </tr>
+        <tr>
+            <th>Кількість студентів</th>
+            <th>Якість успішності</th>
+        </tr>
+        <tr>
+            <th rowspan="3">Спеціальність</th>
+            <td>Економічна кібернетика</td>
+            <td class="center">250</td>
+            <td class="center">80%</td>
+        </tr>
+        <tr>
+            <td>Прикладна математика</td>
+            <td class="center">200</td>
+            <td class="center">75%</td>
+        </tr>
+        <tr>
+            <td>Менеджмент</td>
+            <td class="center">150</td>
+            <td class="center">85%</td>
+        </tr>
+    </table>
+</body>
+</html>
