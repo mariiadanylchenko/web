@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Завдання 3</title>
+    <style>
+        body {
+            background-color: #cbc6cb;
+            color: #7a6ab9;
+            font-family: sans-serif;
+        }
+        #greeting {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1.5em;
+        }
+    </style>
+</head>
+<body>
+    <label>Введіть ваше ім’я: </label>
+    <input type="text" id="myName">
+    <input type="button" value="OK" onclick="showGreeting()">
+
+    <div id="greeting"></div>
+
+    <script>
+        function showGreeting() {
+            const name = document.getElementById('myName').value.trim();
+            if (name) {
+                document.getElementById('greeting').innerHTML = 'Добрий день, ' + name + '!';
+            } else {
+                document.getElementById('greeting').innerHTML = 'Будь ласка, введіть ім’я.';
+            }
+        }
+    </script>
+</body>
+</html>

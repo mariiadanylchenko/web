@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Таблиці</title>
+    <style>
+        table {
+            width: 50%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+        th {
+            text-align: center;
+        }
+        td:first-child {
+            width: 20%;
+        }
+        td:last-child {
+            width: 75%;
+        }
+    </style>
+</head>
+<BODY>
+    <table>
+        <tr>
+            <th colspan="2">Заголовок</th>
+        </tr>
+        <tr>
+            <td>Дані, вирівняні по лівому краю комірки</td>
+            <td align="right">Дані, вирівняні по правому краю комірки</td>
+        </tr>
+        <tr>
+            <td rowspan="2">25% ширини таблиці</td>
+            <td>75% ширини таблиці</td>
+        </tr>
+    </table>
+    
+</BODY>
+    
+
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Реєстрація</title>
+    <style>
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin: auto;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+        h2 {
+            text-align: center;
+            color: red;
+        }
+        .buttons {
+            text-align: center;
+            margin-top: 10px;
+        }
+        button{
+            font-size: 20px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        .goback-button{
+            display: inline-block;
+            padding: 5px 10px;
+            margin-top: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid rgb(73, 73, 73);
+            border-radius: 3px;
+            text-decoration: none;
+            color: black;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h2>Реєстрація</h2>
+        <form>
+            <table>
+                <tr><td>1</td><td>Прізвище</td><td><input type="text"></td></tr>
+                <tr><td>2</td><td>Ім'я, по-батькові</td><td><input type="text"></td></tr>
+                <tr><td>3</td><td>Дата, рік народження</td><td><input type="date"></td></tr>
+                <tr><td>4</td><td>Домашня адреса</td><td><input type="text"></td></tr>
+                <tr><td>5</td><td>Місто роботи(навчання)</td><td><input type="text"></td></tr>
+                <tr><td>6</td><td>Телефон</td><td><input type="text"></td></tr>
+                <tr><td>7</td><td>E-mail</td><td><input type="email"></td></tr>
+                <tr><td>8</td><td>Введіть ваш логін</td><td><input type="text"></td></tr>
+                <tr><td>9</td><td>Введіть ваш пароль</td><td><input type="password"></td></tr>
+                <tr>
+                    <td>10</td><td>Стать</td>
+                    <td>
+                        <input type="radio" name="gender"> Чоловіча
+                        <input type="radio" name="gender"> Жіноча
+                    </td>
+                </tr>
+            </table>
+            <div class="buttons">
+                <button type="reset">Очистити</button>
+                <button type="submit">Реєструвати</button>
+                <a href="index.html" class="goback-button">Повернутися на головну</a>
+            </div>
+        </form>
+    </main>
+</body>
+</html>

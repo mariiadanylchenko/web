@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Завдання 4</title>
+</head>
+<body>
+    <script>
+        let pr1;
+    </script>
+
+    <input 
+        onclick="pr1 = window.open('привітання.html', 'pr1', 'width=300,height=200');"
+        type="button" value="Викликаємо метод open"
+    >
+    <br><br>
+
+    <input 
+        onclick="if (pr1 && !pr1.closed) pr1.close();" 
+        type="button" value="Зачинемо вікно"
+    >
+</body>
+</html>

@@ -1,0 +1,72 @@
+/* лабораторне завдання 8 */
+header {	
+    margin-right: 5%;
+    margin-left: 5%;
+    background: #000;
+    color: #fff;
+    padding: 1rem;
+}
+ 
+main {
+    margin:2%;
+    margin-right: 5%;
+    margin-left: 5%;
+    z-index: 1;
+    position:relative;
+    min-height: 100%;
+    padding-bottom: 150px;
+    background: rgba(0, 0, 0, 0.3); 
+    padding: 1rem;
+}
+ 
+footer {
+    margin:0 auto;
+    background: #000;
+    color: #fff;
+    overflow: visible;
+    padding: 1rem;
+}
+
+#main-page-bg{
+    background-image: url("img/main-bg.jpg"); 
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    font-family: Arial, sans-serif;
+}
+
+#plt-page-bg{
+  background-image: url("img/plt-bg.jpg"); 
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  font-family: Arial, sans-serif;
+}
+
+#reg-page-bg{
+  background-image: url("img/reg-bg.jpg");
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  font-family: Arial, sans-serif;
+}
+
+footer, header {
+  overflow: hidden;
+}
+
+.forms {
+  float: right;
+}
+
+.plt-section{
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.hobbies{
+  margin: 15px 0;
+    padding: 15px;
+    background: #f5f5f5;
+    border-left: 5px solid #333;
+}

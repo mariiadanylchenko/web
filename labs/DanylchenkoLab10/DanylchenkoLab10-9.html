@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Завдання 9</title>
+</head>
+<body>
+    <img src="sun.jpg" id="sun" width="150" height="160" style="border: 1px solid orange;" alt="Квітка">
+
+    <br><br>
+
+    <input type="button" value="Збільшимо рисунок" 
+        onclick="
+            const sunImg = document.getElementById('sun');
+            sunImg.width = 250;
+            sunImg.height = 310;
+            sunImg.alt = 'Ні, це сонце';
+            sunImg.style.border = '4px solid orange';
+        ">
+</body>
+</html>

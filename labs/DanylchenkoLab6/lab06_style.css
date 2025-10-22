@@ -1,0 +1,24 @@
+.indent{
+    text-indent: 20px;
+}
+
+footer{
+    text-align: right;
+    
+}
+
+ul{
+    margin-left: 40px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 100;
+    font-style: italic;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+.headers{
+    text-align: center;
+}

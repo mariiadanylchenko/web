@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Завдання 10</title>
+    <style>
+        body {
+            background-image: url("Backgrnd.gif");
+            background-repeat: no-repeat;
+            background-size: cover;
+            text-align: center;
+            color: rgb(27, 27, 81);
+            font-family: sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>Зміна зображення через задані проміжки часу</h1>
+    <img id="bird" src="bird1.jpg" width="150" height="140" border="1">
+
+    <script>
+        let toggle = false;
+
+        function podmen() {
+            const img = document.getElementById("bird");
+            const currentSrc = img.src;
+            const path = currentSrc.substring(0, currentSrc.lastIndexOf("/") + 1);
+
+            img.src = toggle ? path + "bird1.jpg" : path + "bird2.jpg";
+            toggle = !toggle;
+
+            setTimeout(podmen, 600);
+        }
+
+        window.onload = podmen;
+    </script>
+</body>
+</html>

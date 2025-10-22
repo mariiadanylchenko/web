@@ -1,0 +1,22 @@
+html{
+    scroll-behavior: smooth;
+}
+
+header{
+    text-align: center;
+    background-color: yellow;
+    padding: 10px 0;
+}
+
+.section:target{
+    background-color: #ccc;
+}
+
+.box{
+    background-color: #040;
+}
+
+.header--links{
+    text-decoration: none; 
+    color: inherit;
+}

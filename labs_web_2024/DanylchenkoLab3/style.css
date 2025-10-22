@@ -1,0 +1,52 @@
+html{
+    scroll-behavior: smooth;
+}
+
+header{
+    text-align: center;
+    background-color: yellow;
+    padding: 10px 0;
+}
+
+.section:target{
+    background-color: #ccc;
+}
+
+.box{
+    background-color: #040;
+}
+
+.header--links{
+    text-decoration: none; 
+    color: inherit;
+}
+
+.logo{
+    width: 30px;
+    height: 30px;
+}
+
+.altanka{
+    float: left;  
+    margin-right: 15px; 
+    width: 150px; 
+    height: auto;
+}
+
+.monastr{
+    float: right;  
+    margin-right: 15px; 
+    width: 150px; 
+    height: auto;
+}
+
+.uni-photo{
+    display: block;
+    width: 100%;
+    max-width: 150px; 
+}
+
+.back{
+    width: 250px;
+    height: 150px;
+}
