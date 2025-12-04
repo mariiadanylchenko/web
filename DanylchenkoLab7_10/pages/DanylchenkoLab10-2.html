@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>Макет — Flexbox (Фінальний)</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#wrapper {
+  width: 100%;
+  height: 100vh;
+  padding: 3px;
+  background: #000;
+
+  display: flex;
+  flex-wrap: wrap; 
+}
+
+.block {
+  margin: 3px;
+  border: 1px solid #eee;
+}
+
+.row { height: 25vh; }
+
+.w75 { width: calc(75% - 6px); }
+.w50 { width: calc(50% - 6px); }
+.w25 { width: calc(25% - 6px); }
+.w100 { width: calc(100% - 6px); }
+
+.blue  { background: #5A9BD6; }
+.gray  { background: #6F7B80; }
+.cyan  { background: #60D7D1; }
+.red   { background: #E06C6C; }
+.yellow{ background: #F6BE00; }
+.green { background: #31A671; }
+.brown { background: #BF5A16; }
+
+
+@media (max-width: 499px) {
+  #wrapper {
+    height: auto;
+  }
+  .block {
+    width: calc(100% - 6px);
+    height: auto;
+  }
+}
+
+@media (min-width: 500px) and (max-width: 749px) {
+  #wrapper { height: auto; }
+}
+
+@media (min-width: 750px) and (max-width: 949px) {
+  .row { height: 20vh; }
+}
+
+@media (min-width: 950px) and (max-width: 1199px) {
+  .row { height: 25vh; }
+}
+
+@media (min-width: 1200px) {
+  .row { height: 25vh; }
+}
+</style>
+</head>
+<body>
+
+<div id="wrapper">
+
+  
+  <div class="block row w75 blue"></div>
+  <div class="block row w25 gray"></div>
+
+  
+  <div class="block row w25 cyan"></div>
+  <div class="block row w25 red"></div>
+  <div class="block row w25 yellow"></div>
+  <div class="block row w25 gray"></div>
+
+  
+  <div class="block row w50 green"></div>
+  <div class="block row w25 yellow"></div>
+  <div class="block row w25 gray"></div>
+
+  
+  <div class="block row w100 brown"></div>
+
+</div>
+
+</body>
+</html>

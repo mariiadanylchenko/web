@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>Макет — Float (Фінальний)</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#wrapper {
+  width: 100%;
+  height: 100vh;
+  padding: 3px;
+  background: #000;
+}
+
+.block {
+  float: left;
+  margin: 3px;
+  border: 1px solid #eee;
+}
+
+/* Всі рядки по 25vh */
+.row { height: 25vh; }
+
+/* ширини */
+.w75 { width: calc(75% - 6px); }
+.w50 { width: calc(50% - 6px); }
+.w25 { width: calc(25% - 6px); }
+.w100 { width: calc(100% - 6px); }
+
+/* кольори */
+.blue { background: #5A9BD6; }
+.gray { background: #6F7B80; }
+.cyan { background: #60D7D1; }
+.red { background: #E06C6C; }
+.yellow { background: #F6BE00; }
+.green { background: #31A671; }
+.brown { background: #BF5A16; }
+
+</style>
+</head>
+<body>
+
+<div id="wrapper">
+
+  <!-- 1 ряд -->
+  <div class="block row w75 blue"></div>
+  <div class="block row w25 gray"></div>
+
+  <!-- 2 ряд -->
+  <div class="block row w25 cyan"></div>
+  <div class="block row w25 red"></div>
+  <div class="block row w25 yellow"></div>
+  <div class="block row w25 gray"></div>
+
+  <!-- 3 ряд -->
+  <div class="block row w50 green"></div>
+  <div class="block row w25 yellow"></div>
+  <div class="block row w25 gray"></div>
+
+  <!-- 4 ряд -->
+  <div class="block row w100 brown"></div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>DanylchenkoLab7-4</title>
+</head>
+<body>
+
+<h2>Форма замовлення товару</h2>
+
+<form action="result.html" target="_blank">
+
+<p>Номер банківського рахунку:<br>
+<input type="text" name="bank" size="40" maxlength="30">
+</p>
+
+<p>Особистий номер користувача:<br>
+<input type="text" name="user" size="40" maxlength="30">
+</p>
+
+<p>Оберіть товари:<br>
+<select name="goods" size="5" multiple>
+    <option value="phone">Смартфон</option>
+    <option value="laptop">Ноутбук</option>
+    <option value="tablet">Планшет</option>
+    <option value="tv">Телевізор</option>
+    <option value="watch">Смарт-годинник</option>
+</select>
+</p>
+
+<p>Коментарі:<br>
+<textarea name="comment" cols="50" rows="5"></textarea>
+</p>
+
+<p>Вид оплати:<br>
+<input type="radio" name="pay" value="cash"> Готівка<br>
+<input type="radio" name="pay" value="card"> Безготівковий розрахунок<br>
+</p>
+
+<p>Додаткова інформація у відповіді:<br>
+<input type="checkbox" name="balance" value="yes"> Дані про залишки на рахунку<br>
+<input type="checkbox" name="payments" value="yes"> Список останніх виплат<br>
+</p>
+
+<p>
+<input type="reset" value="Очистити">
+<input type="submit" value="Відправити замовлення">
+</p>
+
+</form>
+
+</body>
+</html>
