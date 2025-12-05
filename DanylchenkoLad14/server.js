@@ -2,26 +2,26 @@ const express = require("express");
 const path = require("path");
 
 const app = express();
-const PORT = 3000;
+const PORT = 4000;
 
-app.use(express.static(path.join(__dirname, "pages"))); 
+app.use(express.static(path.join(__dirname, "/pages")));
 
 app.get("/", (req, res) => {
   res.send(`
-    <h1>Лабораторні роботи з WEB</h1>
+    <h1>Лабораторні роботи</h1>
     <ul>
-      <li><a href="/DanylchenkoLab14-1.html">ЛЗ 1.14 – Завдання 1</a></li>
-      <li><a href="/DanylchenkoLab14-2.html">ЛЗ 1.14 – Завдання 2</a></li>
+      <li><a href="/DanylchekoLab14-1.html">Завдання 1</a></li>
+      <li><a href="/DanylchekoLab14-2.html">Завдання 2</a></li>
     </ul>
   `);
 });
 
-app.get("/bootstrap/layout1", (req, res) => {
-  res.sendFile(path.join(__dirname, "pages/DanylchenkoLab14-1.html"));
+app.get("/lab14/1", (req, res) => {
+  res.sendFile(path.join(__dirname, "pages", "DanylchekoLab14-1.html"));
 });
 
-app.get("/bootstrap/layout2", (req, res) => {
-  res.sendFile(path.join(__dirname, "pages/DanylchenkoLab14-2.html"));
+app.get("/lab14/2", (req, res) => {
+  res.sendFile(path.join(__dirname, "pages", "DanylchekoLab14-2.html"));
 });
 
 app.listen(PORT, () => {
