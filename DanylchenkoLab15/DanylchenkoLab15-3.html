@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DanylchenkoLab15-3</title>
+</head>
+<body>
+  <h1>Пункт 3: ділення числа 10000 на 2</h1>
+  <pre id="output"></pre>
+
+  <script>
+    let numb = 10000;
+    let result = numb;
+    let counter = 0;
+
+    while (result >= 50) {
+      result /= 2;
+      counter++;
+    }
+
+    console.log("result =", result);
+    console.log("counter =", counter);
+
+    document.getElementById("output").textContent =
+      "result = " + result + "\n" + "counter = " + counter;
+  </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DanylchenkoLab15-6</title>
+</head>
+<body>
+  <h1>Пункт 6: день тижня за номером</h1>
+  <p id="output"></p>
+
+  <script>
+    const dayNumber = Number(prompt("Введіть число від 1 до 7:"));
+    const days = [
+      "Понеділок",
+      "Вівторок",
+      "Середа",
+      "Четвер",
+      "П'ятниця",
+      "Субота",
+      "Неділя"
+    ];
+
+    const output = document.getElementById("output");
+
+    if (Number.isInteger(dayNumber) && dayNumber >= 1 && dayNumber <= 7) {
+      output.textContent = "День тижня: " + days[dayNumber - 1];
+    } else {
+      output.textContent = "Помилка: потрібно ввести ціле число від 1 до 7.";
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DanylchenkoLab15-1</title>
+</head>
+<body>
+  <h1>Прості числа від 0 до 100</h1>
+  <pre id="output"></pre>
+
+  <script>
+    let num = 2;
+    const primes = [];
+
+    while (num <= 100) {
+      let isPrime = true;
+
+      for (let i = 2; i < num; i++) {
+        if (num % i === 0) {
+          isPrime = false;
+          break;
+        }
+      }
+
+      if (isPrime) {
+        console.log(num);
+        primes.push(num);
+      }
+
+      num++;
+    }
+
+    document.getElementById("output").textContent = primes.join(", ");
+  </script>
+</body>
+</html>

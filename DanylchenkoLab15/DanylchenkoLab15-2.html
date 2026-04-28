@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DanylchenkoLab15-2</title>
+</head>
+<body>
+  <h1>Пункт 2: do...while (0-10)</h1>
+  <pre id="output"></pre>
+
+  <script>
+    function printNumbers() {
+      let i = 0;
+      const lines = [];
+
+      do {
+        if (i === 0) {
+          lines.push(i + " - це нуль");
+        } else if (i % 2 === 0) {
+          lines.push(i + " - парне число");
+        } else {
+          lines.push(i + " - непарне число");
+        }
+
+        i++;
+      } while (i <= 10);
+
+      return lines;
+    }
+
+    const result = printNumbers();
+    console.log(result.join("\n"));
+    document.getElementById("output").textContent = result.join("\n");
+  </script>
+</body>
+</html>

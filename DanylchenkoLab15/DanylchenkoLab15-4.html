@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DanylchenkoLab15-4</title>
+</head>
+<body>
+  <h1>Пункт 4: місяць, пора року і назва</h1>
+
+  <script>
+    const month = Number(prompt("Введіть номер місяця (1-12):"));
+
+    const monthNames = [
+      "Січень", "Лютий", "Березень", "Квітень", "Травень", "Червень",
+      "Липень", "Серпень", "Вересень", "Жовтень", "Листопад", "Грудень"
+    ];
+
+    let season = "";
+
+    if (month === 12 || month === 1 || month === 2) {
+      season = "Зима";
+    } else if (month >= 3 && month <= 5) {
+      season = "Весна";
+    } else if (month >= 6 && month <= 8) {
+      season = "Літо";
+    } else if (month >= 9 && month <= 11) {
+      season = "Осінь";
+    }
+
+    if (Number.isInteger(month) && month >= 1 && month <= 12) {
+      alert("Місяць: " + monthNames[month - 1] + "\nПора року: " + season);
+    } else {
+      alert("Помилка: потрібно ввести ціле число від 1 до 12.");
+    }
+  </script>
+</body>
+</html>
