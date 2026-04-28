@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lab17 - Завдання 1</title>
+</head>
+<body>
+  <h2>Завдання 1 — Поточна дата і час</h2>
+  <button onclick="showCurrentTime()">Показати поточний час</button>
+  <pre id="output"></pre>
+
+  <script>
+    const DAYS_UK = [
+      'неділя', 'понеділок', 'вівторок', 'середа',
+      'четвер', "п'ятниця", 'субота'
+    ];
+
+    const MONTHS_UK = [
+      'січня', 'лютого', 'березня', 'квітня',
+      'травня', 'червня', 'липня', 'серпня',
+      'вересня', 'жовтня', 'листопада', 'грудня'
+    ];
+
+    function pad(n) {
+      return String(n).padStart(2, '0');
+    }
+
+    function getCurrentDateTime() {
+      const d = new Date();
+
+      const hours   = pad(d.getHours());
+      const minutes = pad(d.getMinutes());
+      const seconds = pad(d.getSeconds());
+      const day     = DAYS_UK[d.getDay()];
+      const date    = pad(d.getDate());
+      const month   = MONTHS_UK[d.getMonth()];
+      const year    = d.getFullYear();
+
+      return `${hours}:${minutes}:${seconds}, ${day} , ${date} ${month} ${year} року`;
+    }
+
+    function showCurrentTime() {
+      const result = getCurrentDateTime();
+      console.log(result);
+      document.getElementById('output').textContent = result;
+    }
+
+    showCurrentTime();
+  </script>
+</body>
+</html>

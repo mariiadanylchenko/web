@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lab17 - Завдання 2</title>
+</head>
+<body>
+  <h2>Завдання 2 — Гра "Вгадай число"</h2>
+  <button onclick="startGame()">Грати</button>
+
+  <script>
+    function pad(n) {
+      return String(n).padStart(2, '0');
+    }
+
+    function getTimestamp() {
+      const d = new Date();
+      const date  = `${pad(d.getDate())}.${pad(d.getMonth() + 1)}.${d.getFullYear()}`;
+      const time  = `${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+      return `${date} ${time}`;
+    }
+
+    function getTempHint(diff) {
+      if (diff > 40) return 'дуже холодно';
+      if (diff > 25) return 'холодно';
+      if (diff > 15) return 'тепло';
+      if (diff > 5)  return 'гаряче';
+      return 'дуже гаряче';
+    }
+
+    function getCompareHint(prevDiff, currDiff) {
+      if (prevDiff === null) return '';
+      if (currDiff < prevDiff) return ', тепліше ніж минула спроба';
+      if (currDiff > prevDiff) return ', холодніше ніж минула спроба';
+      return ', так само як минула спроба';
+    }
+
+    function startGame() {
+      do {
+        playRound();
+      } while (confirm('Бажаєте зіграти ще раз?'));
+    }
+
+    function playRound() {
+      const secret  = Math.floor(Math.random() * 101); 
+      let attempts  = 0;
+      let prevDiff  = null;
+
+      while (true) {
+        const input = prompt('Вгадайте число від 0 до 100:');
+
+        if (input === null) {
+          alert('Гру скасовано. Загадане число було: ' + secret);
+          return;
+        }
+
+        const guess = parseInt(input, 10);
+
+        if (isNaN(guess) || guess < 0 || guess > 100) {
+          alert('Введіть ціле число від 0 до 100!');
+          continue;
+        }
+
+        attempts++;
+        const diff = Math.abs(secret - guess);
+
+        if (diff === 0) {
+          const ts = getTimestamp();
+          console.log(`${ts} Спроба ${attempts}: число ${guess} – вірно!`);
+          alert(`За ${attempts} ${attemptWord(attempts)} ви вгадали число ${secret}`);
+          return;
+        }
+
+        const tempHint    = getTempHint(diff);
+        const compareHint = getCompareHint(prevDiff, diff);
+        const direction   = guess < secret ? 'Число більше' : 'Число менше';
+        const ts          = getTimestamp();
+
+        console.log(`${ts} Спроба ${attempts}: число ${guess} – не вірно`);
+        alert(`Не вірно! ${direction}.\nПідказка: ${tempHint}${compareHint}.`);
+
+        prevDiff = diff;
+      }
+    }
+
+    function attemptWord(n) {
+      if (n % 10 === 1 && n % 100 !== 11) return 'спробу';
+      if ([2, 3, 4].includes(n % 10) && ![12, 13, 14].includes(n % 100)) return 'спроби';
+      return 'спроб';
+    }
+  </script>
+</body>
+</html>
