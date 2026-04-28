@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="uk">
+<head><meta charset="UTF-8"/><title>Lab22-10 — Перевернутий масив</title></head>
+<body>
+  <h2>Завдання 10 — Перевернутий масив, числа в квадрат</h2>
+  <p>Масив перевертається, числові значення підносяться до квадрату, решта — без змін.</p>
+  <pre id="out"></pre>
+  <script>
+    const out = document.getElementById('out');
+    function log(...a) { const s = a.join(' '); console.log(s); out.textContent += s + '\n'; }
+
+    function transformArray(arr) {
+      return [...arr]                           
+        .reverse()
+        .map(el => (typeof el === 'number' ? el * el : el));
+    }
+
+    const arr1 = [1, 2, 3, 4, 5];
+    log('Вхідний:    [' + arr1.join(', ') + ']');
+    log('Результат:  [' + transformArray(arr1).join(', ') + ']');
+    log('');
+
+    const arr2 = [3, 'hello', 5, true, 7, 'world', 2];
+    log('Вхідний:    [' + arr2.join(', ') + ']');
+    log('Результат:  [' + transformArray(arr2).join(', ') + ']');
+    log('');
+
+    const arr3 = [10, -3, 0, 4, -2];
+    log('Вхідний:    [' + arr3.join(', ') + ']');
+    log('Результат:  [' + transformArray(arr3).join(', ') + ']');
+  </script>
+</body>
+</html>

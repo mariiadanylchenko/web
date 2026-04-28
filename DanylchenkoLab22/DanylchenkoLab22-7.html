@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="uk">
+<head><meta charset="UTF-8"/><title>Lab22-7 — Матриця 5×5</title></head>
+<body>
+  <h2>Завдання 7 — Двовимірний масив 5×5</h2>
+  <p>По головній діагоналі: від'ємні → 0, додатні → 1.</p>
+  <pre id="out"></pre>
+  <script>
+    const out = document.getElementById('out');
+    function log(...a) { const s = a.join(' '); console.log(s); out.textContent += s + '\n'; }
+
+    function printMatrix(m) {
+      m.forEach(row => {
+        log(row.map(v => String(v).padStart(4)).join(''));
+      });
+    }
+
+    const matrix = Array.from({ length: 5 }, () =>
+      Array.from({ length: 5 }, () => Math.floor(Math.random() * 41) - 20)
+    );
+
+    log('Початковий масив:');
+    printMatrix(matrix);
+
+    log('\nГоловна діагональ до заміни: [' +
+      [0,1,2,3,4].map(i => matrix[i][i]).join(', ') + ']');
+
+    for (let i = 0; i < 5; i++) {
+      if      (matrix[i][i] < 0) matrix[i][i] = 0;
+      else if (matrix[i][i] > 0) matrix[i][i] = 1;
+    }
+
+    log('\nМасив після заміни головної діагоналі:');
+    printMatrix(matrix);
+
+    log('\nГоловна діагональ після заміни: [' +
+      [0,1,2,3,4].map(i => matrix[i][i]).join(', ') + ']');
+  </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="uk">
+<head><meta charset="UTF-8"/><title>Lab22-5 — isDivisible</title></head>
+<body>
+  <h2>Завдання 5 — isDivisible(n, x, y) — три способи</h2>
+  <pre id="out"></pre>
+  <script>
+    const out = document.getElementById('out');
+    function log(...a) { const s = a.join(' '); console.log(s); out.textContent += s + '\n'; }
+
+    function isDivisibleIf(n, x, y) {
+      if (n % x === 0 && n % y === 0) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    function isDivisibleTernary(n, x, y) {
+      return (n % x === 0 && n % y === 0) ? true : false;
+    }
+
+    function isDivisibleClean(n, x, y) {
+      return n % x === 0 && n % y === 0;
+    }
+
+    const tests = [
+      [12, 3, 4],
+      [10, 2, 5],
+      [10, 2, 3],
+      [100, 4, 5],
+    ];
+
+    log('Спосіб 1: if');
+    tests.forEach(([n, x, y]) =>
+      log(`isDivisibleIf(${n}, ${x}, ${y}) =`, isDivisibleIf(n, x, y)));
+
+    log('\nСпосіб 2: тернарний');
+    tests.forEach(([n, x, y]) =>
+      log(`isDivisibleTernary(${n}, ${x}, ${y}) =`, isDivisibleTernary(n, x, y)));
+
+    log('\nСпосіб 3: без if/тернарного');
+    tests.forEach(([n, x, y]) =>
+      log(`isDivisibleClean(${n}, ${x}, ${y}) =`, isDivisibleClean(n, x, y)));
+  </script>
+</body>
+</html>

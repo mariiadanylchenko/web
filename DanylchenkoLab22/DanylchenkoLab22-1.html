@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="uk">
+<head><meta charset="UTF-8"/><title>Lab22-1 — seconds</title></head>
+<body>
+  <h2>Завдання 1 — Функція seconds</h2>
+  <pre id="out"></pre>
+  <script>
+    const out = document.getElementById('out');
+    function log(...a) { const s = a.join(' '); console.log(s); out.textContent += s + '\n'; }
+
+    function seconds(total) {
+      return total % 60;
+    }
+
+    log('seconds(90)  =', seconds(90));   
+    log('seconds(150) =', seconds(150));  
+    log('seconds(60)  =', seconds(60));   
+    log('seconds(125) =', seconds(125));  
+    log('seconds(3600)=', seconds(3600)); 
+    log('seconds(73)  =', seconds(73));   
+  </script>
+</body>
+</html>

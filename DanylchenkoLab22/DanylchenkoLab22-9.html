@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Lab22-9 — Аналіз числа</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 480px; margin: 30px auto; padding: 0 16px; }
+    .row { display: flex; gap: 8px; margin: 8px 0; }
+    input  { flex: 1; padding: 8px; font-size: 16px; border: 1px solid #ccc; border-radius: 6px; }
+    button { padding: 8px 20px; font-size: 15px; background: #5b8fc9; color: #fff; border: none; border-radius: 6px; cursor: pointer; }
+    button:hover { background: #4a7ab5; }
+    pre { background: #f5f5f5; padding: 12px; border-radius: 8px; font-size: 14px; min-height: 60px; }
+  </style>
+</head>
+<body>
+  <h2>Завдання 9 — Аналіз числа</h2>
+  <div class="row">
+    <input type="number" id="num" placeholder="Введіть число..." value="42"/>
+    <button onclick="analyze()">Аналізувати</button>
+  </div>
+  <pre id="out"></pre>
+
+  <script>
+    const out = document.getElementById('out');
+    function log(...a) { const s = a.join(' '); console.log(s); out.textContent += s + '\n'; }
+
+    function isPrime(n) {
+      const abs = Math.abs(Math.floor(n));
+      if (abs < 2) return false;
+      for (let i = 2; i <= Math.sqrt(abs); i++) {
+        if (abs % i === 0) return false;
+      }
+      return true;
+    }
+
+    function analyze() {
+      out.textContent = '';
+      const n = parseFloat(document.getElementById('num').value);
+
+      if (isNaN(n)) { log('Введіть коректне число!'); return; }
+
+      log('Число:', n);
+
+      if      (n > 0) log('Знак:         додатне');
+      else if (n < 0) log('Знак:         від\'ємне');
+      else            log('Знак:         нуль');
+
+      if (Number.isInteger(n)) {
+        log('Просте:       ' + (isPrime(n) ? 'так' : 'ні'));
+      } else {
+        log('Просте:       не застосовно (не ціле)');
+      }
+
+      const dividers = [2, 3, 5, 6, 9];
+      dividers.forEach(d => {
+        const divisible = Number.isInteger(n) && n % d === 0;
+        log(`Ділиться на ${d}: ${divisible ? 'так' : 'ні'}`);
+      });
+    }
+
+    analyze();
+  </script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Lab22-8 — Арифметичні операції</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 480px; margin: 30px auto; padding: 0 16px; }
+    input, select { padding: 8px; font-size: 15px; width: 100%; margin: 6px 0; border: 1px solid #ccc; border-radius: 6px; }
+    button { padding: 10px 24px; font-size: 15px; background: #5b8fc9; color: #fff; border: none; border-radius: 6px; cursor: pointer; margin-top: 8px; }
+    button:hover { background: #4a7ab5; }
+    #result { margin-top: 16px; padding: 12px; border-radius: 8px; font-size: 18px; font-weight: bold; display: none; }
+    #result.ok  { background: #eaf7ee; color: #1a5c33; }
+    #result.err { background: #fdecea; color: #b71c1c; }
+    pre { background: #f5f5f5; padding: 10px; border-radius: 6px; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <h2>Завдання 8 — Арифметичні операції</h2>
+  <label>Перше число (a):</label>
+  <input type="number" id="numA" value="10" />
+  <label>Друге число (b):</label>
+  <input type="number" id="numB" value="5" />
+  <label>Операція:</label>
+  <select id="op">
+    <option value="add">Додавання</option>
+    <option value="sub">Віднімання</option>
+    <option value="mul">Множення</option>
+    <option value="div">Ділення</option>
+  </select>
+  <button onclick="doCalc()">Обчислити</button>
+  <div id="result"></div>
+
+  <pre id="console"></pre>
+
+  <script>
+    const cons = document.getElementById('console');
+    function clog(msg) { console.log(msg); cons.textContent += msg + '\n'; }
+
+    function Add(a, b) { const r = a + b; clog(`Add(${a}, ${b}) = ${r}`); return r; }
+    function Sub(a, b) { const r = a - b; clog(`Sub(${a}, ${b}) = ${r}`); return r; }
+    function Mul(a, b) { const r = a * b; clog(`Mul(${a}, ${b}) = ${r}`); return r; }
+    function Div(a, b) {
+      if (b === 0) { clog(`Div(${a}, ${b}) → Ділення на нуль!`); return null; }
+      const r = a / b;
+      clog(`Div(${a}, ${b}) = ${r}`);
+      return r;
+    }
+
+    const ops = { add: Add, sub: Sub, mul: Mul, div: Div };
+    const signs = { add: '+', sub: '−', mul: '×', div: '÷' };
+
+    function doCalc() {
+      const a   = parseFloat(document.getElementById('numA').value);
+      const b   = parseFloat(document.getElementById('numB').value);
+      const key = document.getElementById('op').value;
+      const res = document.getElementById('result');
+
+      if (isNaN(a) || isNaN(b)) {
+        res.className = 'err'; res.style.display = 'block';
+        res.textContent = 'Введіть коректні числа!';
+        return;
+      }
+
+      const result = ops[key](a, b);
+      res.style.display = 'block';
+
+      if (result === null) {
+        res.className = 'err';
+        res.textContent = 'Помилка: ділення на нуль!';
+      } else {
+        res.className = 'ok';
+        res.textContent = `${a} ${signs[key]} ${b} = ${result}`;
+      }
+    }
+  </script>
+</body>
+</html>

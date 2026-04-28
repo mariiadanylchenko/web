@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="uk">
+<head><meta charset="UTF-8"/><title>Lab22-2 — perimeter</title></head>
+<body>
+  <h2>Завдання 2 — Периметр правильного багатокутника</h2>
+  <p>P = n × a, де <code>side</code> — довжина сторони, <code>count</code> — кількість сторін.</p>
+  <pre id="out"></pre>
+  <script>
+    const out = document.getElementById('out');
+    function log(...a) { const s = a.join(' '); console.log(s); out.textContent += s + '\n'; }
+
+    function perimeter(side, count) {
+      return side * count;
+    }
+
+    log('Трикутник   (side=5, count=3):', perimeter(5, 3));   
+    log('Квадрат     (side=4, count=4):', perimeter(4, 4));   
+    log('П\'ятикутник (side=6, count=5):', perimeter(6, 5));  
+    log('Шестикутник (side=3, count=6):', perimeter(3, 6));   
+    log('Дванадцятик (side=2, count=12):', perimeter(2, 12)); 
+  </script>
+</body>
+</html>

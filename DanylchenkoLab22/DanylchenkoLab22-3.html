@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="uk">
+<head><meta charset="UTF-8"/><title>Lab22-3 — FizzBuzz</title></head>
+<body>
+  <h2>Завдання 3 — FizzBuzz</h2>
+  <p>Числа від 1 до n: кратні 3 → fizz, кратні 5 → buzz, кратні 15 → fizzbuzz.</p>
+  <pre id="out"></pre>
+  <script>
+    const out = document.getElementById('out');
+    function log(...a) { const s = a.join(' '); console.log(s); out.textContent += s + '\n'; }
+
+    function fizzBuzz(n) {
+      for (let i = 1; i <= n; i++) {
+        if      (i % 15 === 0) log('fizzbuzz');
+        else if (i % 3  === 0) log('fizz');
+        else if (i % 5  === 0) log('buzz');
+        else                   log(i);
+      }
+    }
+
+    log('--- fizzBuzz(20) ---');
+    fizzBuzz(20);
+  </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="uk">
+<head><meta charset="UTF-8"/><title>Lab22-11 — Видалення дублікатів</title></head>
+<body>
+  <h2>Завдання 11 — Видалення дублікатів з масиву</h2>
+  <pre id="out"></pre>
+  <script>
+    const out = document.getElementById('out');
+    function log(...a) { const s = a.join(' '); console.log(s); out.textContent += s + '\n'; }
+
+    function removeDuplicatesSet(arr) {
+      return [...new Set(arr)];
+    }
+
+    function removeDuplicatesFilter(arr) {
+      return arr.filter((val, idx) => arr.indexOf(val) === idx);
+    }
+
+    function removeDuplicatesReduce(arr) {
+      return arr.reduce((acc, val) => {
+        if (!acc.includes(val)) acc.push(val);
+        return acc;
+      }, []);
+    }
+
+    const input = [1, 2, 2, 4, 5, 4, 7, 8, 7, 3, 6];
+    log('Вхідний масив:   [' + input.join(', ') + ']');
+    log('');
+    log('Спосіб 1:    [' + removeDuplicatesSet(input).join(', ')    + ']');
+
+    log('');
+    const input2 = ['a', 'b', 'a', 'c', 'b', 'd'];
+    log('Вхідний масив:   [' + input2.join(', ') + ']');
+    log('Результат: [' + removeDuplicatesSet(input2).join(', ') + ']');
+  </script>
+</body>
+</html>

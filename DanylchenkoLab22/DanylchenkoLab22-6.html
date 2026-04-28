@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="uk">
+<head><meta charset="UTF-8"/><title>Lab22-6 — Масив</title></head>
+<body>
+  <h2>Завдання 6 — Операції з масивом N елементів</h2>
+  <pre id="out"></pre>
+  <script>
+    const out = document.getElementById('out');
+    function log(...a) { const s = a.join(' '); console.log(s); out.textContent += s + '\n'; }
+
+    const N = 12;
+
+    const arr = Array.from({ length: N }, () => Math.floor(Math.random() * 201) - 50);
+
+    log('Масив (' + N + ' елементів):');
+    log('[' + arr.join(', ') + ']');
+    log('');
+
+    const max  = Math.max(...arr);
+    const min  = Math.min(...arr);
+    const sum  = arr.reduce((acc, v) => acc + v, 0);
+    const avg  = sum / N;
+    const odds = arr.filter(v => v % 2 !== 0);
+
+    log('Максимальне значення:', max);
+    log('Мінімальне значення: ', min);
+    log('Загальна сума:       ', sum);
+    log('Середнє арифметичне: ', avg.toFixed(2));
+    log('Непарні значення:    ', '[' + odds.join(', ') + ']');
+  </script>
+</body>
+</html>

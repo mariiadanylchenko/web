@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="uk">
+<head><meta charset="UTF-8"/><title>Lab22-4 — Calculate</title></head>
+<body>
+  <h2>Завдання 4 — Середнє арифметичне трьох чисел</h2>
+  <pre id="out"></pre>
+  <script>
+    const out = document.getElementById('out');
+    function log(...a) { const s = a.join(' '); console.log(s); out.textContent += s + '\n'; }
+
+    function Calculate(a, b, c) {
+      const avg = (a + b + c) / 3;
+      log(`Calculate(${a}, ${b}, ${c}) → середнє = ${avg}`);
+      return avg;
+    }
+
+    Calculate(10, 20, 30);  
+    Calculate(5, 15, 25);   
+    Calculate(100, 200, 0);  
+    Calculate(7, 14, 21);    
+    Calculate(-5, 0, 5);    
+  </script>
+</body>
+</html>
