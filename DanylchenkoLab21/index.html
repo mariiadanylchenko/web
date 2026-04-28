@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lab21 — AJAX: Квадрат числа</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f0f2f5;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 40px 48px;
+      box-shadow: 0 4px 24px rgba(0,0,0,.10);
+      width: 100%;
+      max-width: 440px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 8px;
+      color: #1a1a1a;
+    }
+
+    p.sub {
+      font-size: 14px;
+      color: #888;
+      margin-bottom: 28px;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    input[type="number"] {
+      flex: 1;
+      padding: 12px 14px;
+      font-size: 18px;
+      border: 2px solid #d0d0d0;
+      border-radius: 8px;
+      outline: none;
+      transition: border-color .2s;
+      -moz-appearance: textfield;
+    }
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; }
+    input[type="number"]:focus { border-color: #5b8fc9; }
+
+    button {
+      padding: 12px 22px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background: #5b8fc9;
+      color: #fff;
+      cursor: pointer;
+      transition: background .15s;
+      white-space: nowrap;
+    }
+    button:hover   { background: #4a7ab5; }
+    button:active  { background: #3a68a0; }
+
+    #result {
+      min-height: 64px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      border-radius: 10px;
+      padding: 16px;
+      font-size: 16px;
+      transition: background .25s;
+    }
+    #result.hidden  { display: none; }
+    #result.success { background: #eaf7ee; color: #217a45; }
+    #result.error   { background: #fdecea; color: #b71c1c; }
+
+    #result .big {
+      font-size: 36px;
+      font-weight: bold;
+      line-height: 1.1;
+    }
+
+    #spinner {
+      display: none;
+      width: 28px; height: 28px;
+      border: 3px solid #d0d0d0;
+      border-top-color: #5b8fc9;
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+      margin: 8px auto;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Квадрат числа</h1>
+
+    <div class="input-row">
+      <input id="numInput" type="number" placeholder="Число..." autofocus />
+      <button id="calcBtn">Обрахувати</button>
+    </div>
+
+    <div id="spinner"></div>
+    <div id="result" class="hidden"></div>
+  </div>
+
+  <script>
+    const input   = document.getElementById('numInput');
+    const btn     = document.getElementById('calcBtn');
+    const spinner = document.getElementById('spinner');
+    const result  = document.getElementById('result');
+
+    function showResult(type, html) {
+      result.className = type;
+      result.innerHTML = html;
+    }
+
+    function calculate() {
+      if (window.location.protocol === 'file:') {
+        showResult('error', 'Сторінку відкрито напряму як файл.<br>Запустіть сервер і відкрийте через браузер:<br><strong>node server.js</strong> → <strong>http://localhost:3021</strong>');
+        return;
+      }
+
+      const val = input.value.trim();
+      if (val === '') {
+        showResult('error', 'Будь ласка, введіть число.');
+        return;
+      }
+
+      result.className = 'hidden';
+      spinner.style.display = 'block';
+      btn.disabled = true;
+
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', '/square');
+      xhr.setRequestHeader('Content-Type', 'application/json');
+
+      xhr.onload = function () {
+        spinner.style.display = 'none';
+        btn.disabled = false;
+
+        if (xhr.status === 200) {
+          const data = JSON.parse(xhr.responseText);
+          showResult('success',
+            `<div class="big">${data.square}</div>
+             <div>${data.message}</div>`
+          );
+        } else {
+          try {
+            const err = JSON.parse(xhr.responseText);
+            showResult('error', err.error || 'Сталася помилка.');
+          } catch {
+            showResult('error', 'Сталася помилка на сервері.');
+          }
+        }
+      };
+
+      xhr.onerror = function () {
+        spinner.style.display = 'none';
+        btn.disabled = false;
+        showResult('error', 'Сервер недоступний.<br>Переконайтесь, що запущено: <strong>node server.js</strong>');
+      };
+
+      xhr.send(JSON.stringify({ number: val }));
+    }
+
+    btn.addEventListener('click', calculate);
+    input.addEventListener('keydown', e => { if (e.key === 'Enter') calculate(); });
+  </script>
+
+</body>
+</html>
