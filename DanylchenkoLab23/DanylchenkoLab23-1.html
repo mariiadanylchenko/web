@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Lab23-1 — Мова і день тижня</title>
+</head>
+<body>
+  <h2>Завдання 1 — Вибір мови та дня тижня</h2>
+  <p>Натисніть кнопку для запуску діалогу.</p>
+  <button onclick="run()">Запустити</button>
+
+  <script>
+    const weekData = {
+      ua: {
+        askDay:   'Введіть номер дня тижня від 1 до 7?',
+        days:     ['Понеділок', 'Вівторок', 'Середа', 'Четвер', "П'ятниця", 'Субота', 'Неділя'],
+        badLang:  'Неправильний ввід. Введіть "ua" або "en".',
+        badDay:   'Неправильний ввід. Введіть число від 1 до 7.',
+      },
+      en: {
+        askDay:   'Enter the day number of the week (from 1 to 7)?',
+        days:     ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+        badLang:  'Invalid input. Enter "ua" or "en".',
+        badDay:   'Invalid input. Enter a number from 1 to 7.',
+      },
+    };
+
+    function run() {
+      let lang = null;
+      while (true) {
+        const input = prompt('Виберіть мову "ua" або "en"?');
+        if (input === null) return;
+        const lower = input.trim().toLowerCase();
+        if (lower === 'ua' || lower === 'en') { lang = lower; break; }
+        alert(weekData.ua.badLang);
+      }
+
+      const data = weekData[lang];
+
+      let dayIndex = null;
+      while (true) {
+        const input = prompt(data.askDay);
+        if (input === null) return;
+        const n = parseInt(input, 10);
+        if (n >= 1 && n <= 7) { dayIndex = n - 1; break; }
+        alert(data.badDay);
+      }
+
+      alert(data.days[dayIndex]);
+    }
+  </script>
+</body>
+</html>

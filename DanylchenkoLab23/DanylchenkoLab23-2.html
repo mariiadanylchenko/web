@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Lab23-2 — Електрична мережа</title>
+  <style>
+    body  { font-family: Arial, sans-serif; max-width: 760px; margin: 20px auto; padding: 0 16px; }
+    pre   { background: #f5f5f5; padding: 14px; border-radius: 8px; font-size: 13px; line-height: 1.6; }
+    h3    { margin: 20px 0 4px; }
+    table { border-collapse: collapse; width: 100%; margin: 8px 0; font-size: 14px; }
+    th,td { border: 1px solid #ccc; padding: 6px 10px; text-align: left; }
+    th    { background: #e8e8e8; }
+    .surplus { color: #1a6b30; font-weight: bold; }
+    .deficit { color: #b71c1c; font-weight: bold; }
+    .neutral { color: #555; }
+  </style>
+</head>
+<body>
+  <h2>Завдання 2 — Електрична мережа (ООП)</h2>
+  <div id="app"></div>
+
+  <script>
+    class PowerPlant {
+      constructor(name, powerMW) {
+        this.name    = name;
+        this.powerMW = powerMW;
+      }
+      generate() { return this.powerMW; }
+      describe() { return `Електростанція "${this.name}" (${this.powerMW} МВт)`; }
+    }
+
+    class SolarPanel {
+      constructor(name, maxPowerMW) {
+        this.name       = name;
+        this.maxPowerMW = maxPowerMW;
+      }
+      generate(isDay) { return isDay ? this.maxPowerMW : 0; }
+      describe() { return `Сонячна панель "${this.name}" (вдень ${this.maxPowerMW} МВт, вночі 0)`; }
+    }
+
+    class Building {
+      constructor(name, apartments) {
+        this.name       = name;
+        this.apartments = apartments;
+      }
+      consume(isDay) {
+        const kWperApt = isDay ? 4 : 1;
+        return (this.apartments * kWperApt) / 1000;
+      }
+      describe() { return `Будинок "${this.name}" (${this.apartments} квартир)`; }
+    }
+
+    class TransmissionLine {
+      constructor(name, capacityMW, pricePerMW) {
+        this.name        = name;
+        this.capacityMW  = capacityMW;
+        this.pricePerMW  = pricePerMW;
+      }
+      describe() {
+        return `Лінія "${this.name}" (ємність ${this.capacityMW} МВт, ціна ${this.pricePerMW} грн/МВт)`;
+      }
+    }
+
+    class Grid {
+      constructor(cityName) {
+        this.cityName = cityName;
+        this.elements = [];
+      }
+
+      add(element) { this.elements.push(element); return this; }
+
+      _calcBalance(isDay) {
+        let generated = 0, consumed = 0;
+        for (const el of this.elements) {
+          if (el instanceof PowerPlant || el instanceof SolarPanel) {
+            generated += el.generate(isDay);
+          } else if (el instanceof Building) {
+            consumed += el.consume(isDay);
+          }
+        }
+        return { generated, consumed, balance: generated - consumed };
+      }
+
+      _bestLine(needMW) {
+        const lines    = this.elements.filter(e => e instanceof TransmissionLine);
+        const suitable = lines.filter(l => l.capacityMW >= Math.abs(needMW));
+        if (!suitable.length) return null;
+        return needMW < 0
+          ? suitable.reduce((a, b) => a.pricePerMW < b.pricePerMW ? a : b)
+          : suitable.reduce((a, b) => a.pricePerMW > b.pricePerMW ? a : b);
+      }
+
+      report(isDay) {
+        const label  = isDay ? 'День' : 'Ніч';
+        const { generated, consumed, balance } = this._calcBalance(isDay);
+        const line   = this._bestLine(balance);
+
+        let action, cost, cssClass;
+        if (Math.abs(balance) < 0.0001) {
+          action = 'Баланс ідеальний — купівля/продаж не потрібні.';
+          cost = 0; cssClass = 'neutral';
+        } else if (balance < 0) {
+          const deficit = Math.abs(balance);
+          if (line) {
+            cost   = deficit * line.pricePerMW;
+            action = `Купити ${deficit.toFixed(3)} МВт через "${line.name}" = ${cost.toFixed(2)} грн`;
+          } else {
+            action = `⚠ Дефіцит ${Math.abs(balance).toFixed(3)} МВт — немає підходящої лінії!`;
+            cost = 0;
+          }
+          cssClass = 'deficit';
+        } else {
+          if (line) {
+            cost   = balance * line.pricePerMW;
+            action = `Продати ${balance.toFixed(3)} МВт через "${line.name}" = ${cost.toFixed(2)} грн прибутку`;
+          } else {
+            action = `Надлишок ${balance.toFixed(3)} МВт — немає підходящої лінії для продажу.`;
+            cost = 0;
+          }
+          cssClass = 'surplus';
+        }
+
+        return { label, generated, consumed, balance, action, cost, cssClass };
+      }
+    }
+
+    const grid = new Grid('Сонячне місто');
+
+    grid
+      .add(new PowerPlant('ТЕЦ-1', 50))
+      .add(new PowerPlant('ГЕС-2', 30))
+      .add(new SolarPanel('Сонячна ферма А', 4))
+      .add(new SolarPanel('Сонячна ферма Б', 3))
+      .add(new SolarPanel('Сонячна панель В', 2))
+      .add(new Building('Житловий квартал №1', 200))
+      .add(new Building('Житловий квартал №2', 350))
+      .add(new Building('Мікрорайон "Центр"', 400))
+      .add(new Building('Котедж. містечко', 80))
+      .add(new TransmissionLine('Лінія Північ', 20, 8.5))
+      .add(new TransmissionLine('Лінія Схід', 15, 6.0))
+      .add(new TransmissionLine('Лінія Захід', 30, 7.2));
+
+    const app = document.getElementById('app');
+
+    let listHtml = '<h3>Елементи мережі міста "' + grid.cityName + '"</h3><table>';
+    listHtml += '<tr><th>Тип</th><th>Назва</th><th>Характеристика</th></tr>';
+    grid.elements.forEach(el => {
+      const type = el instanceof PowerPlant       ? 'Електростанція'
+                 : el instanceof SolarPanel       ? 'Сонячна панель'
+                 : el instanceof Building         ? 'Житловий будинок'
+                 : el instanceof TransmissionLine ? 'Лінія передачі'
+                 : 'Невідомо';
+      listHtml += `<tr><td>${type}</td><td>${el.name}</td><td>${el.describe().split('"').pop().replace('"','').split('(')[1]?.replace(')','') || ''}</td></tr>`;
+    });
+    listHtml += '</table>';
+    app.innerHTML += listHtml;
+
+    [true, false].forEach(isDay => {
+      const r = grid.report(isDay);
+      app.innerHTML += `
+        <h3>${r.label}</h3>
+        <table>
+          <tr><th>Вироблено</th><td>${r.generated.toFixed(3)} МВт</td></tr>
+          <tr><th>Споживається</th><td>${r.consumed.toFixed(3)} МВт</td></tr>
+          <tr><th>Баланс</th><td class="${r.cssClass}">${r.balance >= 0 ? '+' : ''}${r.balance.toFixed(3)} МВт</td></tr>
+          <tr><th>Рішення</th><td class="${r.cssClass}">${r.action}</td></tr>
+        </table>`;
+    });
+  </script>
+</body>
+</html>
