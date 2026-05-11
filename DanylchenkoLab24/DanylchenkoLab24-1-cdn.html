@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lab24 — React CDN</title>
+
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f0f2f5;
+    }
+    .card {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 4px 24px rgba(0,0,0,.10);
+      padding: 40px 48px;
+      max-width: 600px;
+      width: 100%;
+      text-align: center;
+    }
+    .card h1  { font-size: 26px; margin-bottom: 6px; color: #1a1a1a; }
+    .card h2  { font-size: 18px; color: #555; margin-bottom: 20px; }
+    .card p   { line-height: 1.7; color: #333; margin-bottom: 12px; }
+    .badge {
+      display: inline-block;
+      background: #5b8fc9;
+      color: #fff;
+      font-size: 12px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-bottom: 16px;
+    }
+    hr { border: none; border-top: 1px solid #eee; margin: 24px 0; }
+    .hobbies { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 12px; }
+    .hobby-tag {
+      background: #eaf0fb;
+      color: #2d5fa3;
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { Component } = React;
+
+    class HobbyClass extends Component {
+      render() {
+        const { name, hobbies, description } = this.props;
+        return (
+          <div>
+            <span className="badge">Class Component</span>
+            <h1>{name}</h1>
+            <h2>Мої хобі</h2>
+            <p>{description}</p>
+            <div className="hobbies">
+              {hobbies.map((h, i) => (
+                <span key={i} className="hobby-tag">{h}</span>
+              ))}
+            </div>
+          </div>
+        );
+      }
+    }
+
+    function HobbyFunctional({ name, hobbies, description }) {
+      return (
+        <div>
+          <span className="badge">Functional Component</span>
+          <h1>{name}</h1>
+          <h2>Мої хобі</h2>
+          <p>{description}</p>
+          <div className="hobbies">
+            {hobbies.map((h, i) => (
+              <span key={i} className="hobby-tag">{h}</span>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    const data = {
+      name:        'Данильченко',
+      description: 'Захоплююся веб-розробкою та програмуванням. ' +
+                   'Люблю створювати цікаві проєкти, вивчати нові технології ' +
+                   'та вирішувати нестандартні задачі.',
+      hobbies: ['Веб-розробка', 'JavaScript', 'React', 'Програмування', 'UI/UX дизайн', 'Open Source'],
+    };
+
+    function App() {
+      return (
+        <div className="card">
+          <HobbyClass {...data} />
+          <hr />
+          <HobbyFunctional {...data} />
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
