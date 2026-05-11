@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Завдання 1</title>
+<style>
+body{
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+.images{
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.images img{
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.links{
+    margin-bottom: 30px;
+}
+
+.links a{
+    display: block;
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+.inputs{
+    margin-bottom: 30px;
+}
+
+.inputs input{
+    display: block;
+    margin: 10px 0;
+    padding: 10px;
+    width: 250px;
+}
+
+#demo{
+    font-size: 20px;
+    color: blue;
+}
+
+.paragraphs p{
+    font-size: 22px;
+    cursor: pointer;
+    margin: 10px 0;
+}
+</style>
+</head>
+<body>
+
+<h2>Рисунки</h2>
+
+<div class="images">
+    <img src="https://picsum.photos/id/1015/300/300" width="300">
+    <img src="https://picsum.photos/id/1025/300/300" width="300">
+    <img src="https://picsum.photos/id/1035/300/300" width="300">
+</div>
+
+<h2>Посилання</h2>
+
+<div class="links">
+    <a href="https://google.com">Google</a>
+    <a href="https://youtube.com">YouTube</a>
+    <a href="https://wikipedia.org">Wikipedia</a>
+</div>
+
+<h2>Input</h2>
+
+<div class="inputs">
+    <input type="text" value="Перший input">
+    <input type="text" value="Другий input">
+    <input type="text" value="Третій input">
+</div>
+
+<p id="demo"></p>
+
+<h2>Параграфи</h2>
+
+<div class="paragraphs">
+    <p>one</p>
+    <p>two</p>
+    <p>three</p>
+</div>
+
+<script>
+const images = document.querySelectorAll('.images img');
+
+images.forEach(function(img){
+    img.onclick = function(){
+        console.log(this.getAttribute('width'));
+    };
+});
+
+const links = document.querySelectorAll('.links a');
+
+function showTitle(){
+    this.title = this.href;
+}
+
+links.forEach(function(link){
+    link.addEventListener('mouseover', showTitle);
+    link.removeEventListener('mouseout', showTitle);
+});
+
+const inputs = document.querySelectorAll('.inputs input');
+const demo = document.getElementById('demo');
+
+inputs.forEach(function(input){
+
+    input.addEventListener('click', function(){
+        demo.textContent = this.value;
+    });
+
+    function firstClick(){
+        console.log(input.value);
+        input.removeEventListener('click', firstClick);
+
+        input.addEventListener('click', function(){
+            alert(input.value);
+        });
+    }
+
+    input.addEventListener('click', firstClick);
+});
+
+const numbers = {
+    one: 1,
+    two: 2,
+    three: 3
+};
+
+const paragraphs = document.querySelectorAll('.paragraphs p');
+
+paragraphs.forEach(function(p){
+    p.addEventListener('click', function(){
+        const num = numbers[this.textContent];
+        this.textContent = num * num;
+    });
+});
+</script>
+
+</body>
+</html>

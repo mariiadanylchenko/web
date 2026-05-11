@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Завдання 2</title>
+<style>
+body{
+    font-family: Arial, sans-serif;
+    padding: 30px;
+}
+
+.container{
+    display: flex;
+    gap: 20px;
+}
+
+.box{
+    width: 200px;
+    height: 200px;
+    background-color: green;
+    cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+</div>
+
+<script>
+const boxes = document.querySelectorAll('.box');
+
+boxes.forEach(function(box){
+
+    function red(){
+        box.style.backgroundColor = 'red';
+        box.removeEventListener('click', red);
+        box.addEventListener('click', green);
+    }
+
+    function green(){
+        box.style.backgroundColor = 'green';
+        box.removeEventListener('click', green);
+        box.addEventListener('click', red);
+    }
+
+    box.addEventListener('click', red);
+});
+</script>
+
+</body>
+</html>
